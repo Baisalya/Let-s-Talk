@@ -59,7 +59,7 @@ public class NewServlet extends HttpServlet {
                 }
             }
         }catch (Exception e){
-             throw new ServletException("login faild",e);
+             //throw new ServletException("login faild",e);
             
         } 
          } 

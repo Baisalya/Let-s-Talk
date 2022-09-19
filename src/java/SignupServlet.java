@@ -50,7 +50,7 @@ public class SignupServlet extends HttpServlet {
             response.sendRedirect("index.html");
             System.out.println("sucessfull");
         }catch (Exception e){
-           throw new ServletException("Signup faild",e);
+          // throw new ServletException("Signup faild",e);
         }
     }
 
