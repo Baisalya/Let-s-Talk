@@ -42,9 +42,14 @@ public class NewServlet extends HttpServlet {
          dbconnection connow=new dbconnection();
         Connection connectDB=connow.getCon();
         String Loginveryfy="Select count(1) from user where email='"+user+"' and password='"+pass+"'";
-        if(user.isEmpty() || pass.isEmpty()){
-        out.println("username and password cant be empty");
-        }else{
+        if(user.isEmpty()){
+        out.println("username cant be empty");
+      
+        }  else if(pass.isEmpty()){
+        out.println("password cant be empty");
+        }
+        
+        else{
    try {
             Statement statement=connectDB.createStatement();
             ResultSet resultSet=statement.executeQuery(Loginveryfy);
