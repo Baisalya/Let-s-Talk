@@ -13,7 +13,7 @@
         <url-pattern>/NewServlet</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
-        <welcome-file>index.html</welcome-file>
+        <welcome-file>main.html</welcome-file>
     </welcome-file-list>
     <servlet-mapping>
         <servlet-name>SignupServlet</servlet-name>
