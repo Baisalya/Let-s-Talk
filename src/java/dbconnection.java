@@ -8,7 +8,7 @@ public class dbconnection {
    public Connection getCon(){
        String dbname="letstalk?useSSL=false";
        String user="root";
-       String password="Kunmun@2001";
+       String password="";
        String url="jdbc:mysql://localhost:3306/"+dbname;
        try {
            Class.forName("com.mysql.cj.jdbc.Driver");
