@@ -8,12 +8,12 @@
 <%@ page import="java.io.*" %> 
 <%@ page import="connection.dbconnection"%>
         <%   
-        String user = request.getParameter("email");
+        String email = request.getParameter("email");
         String pass = request.getParameter("pass");
         dbconnection connow=new dbconnection();
         Connection connectDB=connow.getCon();
-        String Loginveryfy="Select count(1) from user where email='"+user+"' and password='"+pass+"'";
-        if(user.isEmpty()){
+        String Loginveryfy="Select count(1) from user where email='"+email+"' and password='"+pass+"'";
+        if(email.isEmpty()){
         out.println("username cant be empty");
       
         }  else if(pass.isEmpty()){
@@ -27,6 +27,8 @@
             while (resultSet.next()){
                 if (resultSet.getInt(1)==1){
                  response.sendRedirect("home.html");
+                 session.setAttribute("email",email);
+                 session.setAttribute("pass",pass);
 
                 }else{
                     out.println("Incorrect login credentials");
