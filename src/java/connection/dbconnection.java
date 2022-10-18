@@ -3,9 +3,10 @@ package connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class dbconnection {
-
+    private static dbconnection instance;
    public Connection con;
    public Connection getCon(){
        String dbname="letstalk?useSSL=false";
@@ -22,4 +23,16 @@ public class dbconnection {
        }
        return con;
    }
+    public Connection getConnection() {
+        return con;
+    }
+    public static dbconnection getInstance() throws SQLException {
+        if (instance == null) {
+            instance = new dbconnection();
+        } else if (instance.getConnection().isClosed()) {
+            instance = new dbconnection();
+        }
+
+        return instance;
+    }
 }
