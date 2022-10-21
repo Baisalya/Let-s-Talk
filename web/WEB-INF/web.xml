@@ -9,10 +9,6 @@
         <servlet-class>SignupServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Updateuser</servlet-name>
-        <servlet-class>Updateuser</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>logout</servlet-name>
         <servlet-class>logout</servlet-class>
     </servlet>
@@ -23,6 +19,10 @@
     <servlet>
         <servlet-name>UpdateUser</servlet-name>
         <servlet-class>UpdateUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChatServlet</servlet-name>
+        <servlet-class>ChatServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>NewServlet</servlet-name>
@@ -36,10 +36,6 @@
         <url-pattern>/SignupServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Updateuser</servlet-name>
-        <url-pattern>/Updateuser</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>logout</servlet-name>
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
@@ -50,6 +46,10 @@
     <servlet-mapping>
         <servlet-name>UpdateUser</servlet-name>
         <url-pattern>/UpdateUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChatServlet</servlet-name>
+        <url-pattern>/ChatServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

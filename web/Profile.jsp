@@ -42,12 +42,12 @@
                     <div class="user-avatar">
                         <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin">
                     </div>
-                    <h5 class="user-name" name="username"id="username"><%request.getAttribute()%></h5>
-                    <h6 class="user-email"name="useremail"id="useremail"/>
+                    <h5 class="user-name" name="username"id="username"><%= request.getAttribute("name")%></h5>
+                    <h6 class="user-email"name="useremail"id="useremail"><%= request.getAttribute("email")%></h6>
                 </div>
                 <div class="about">
                     <h5>Bio</h5>
-                    <p>I'm Ritu. Full Stack Designer I enjoy creating user-centric, delightful and human experiences.</p>
+                    <p>I'm <%= request.getAttribute("name")%>. Full Stack Designer I enjoy creating user-centric, delightful and human experiences.</p>
                 </div>
             </div>
         </div>
@@ -63,13 +63,14 @@
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="form-group">
                         <label for="fullName" >Full Name</label>
-                        <input type="text" class="form-control" id="fullName" placeholder="Enter full name">
+                        <h5 class="user-name" name="username"id="username"><%= request.getAttribute("name")%></h5>
+                           
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="form-group">
                         <label for="eMail">Email</label>
-                        <input type="email" class="form-control" id="eMail" placeholder="Enter email ID">
+                        <h5 class="user-email"name="useremail"id="useremail"><%= request.getAttribute("email")%></h5>
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
