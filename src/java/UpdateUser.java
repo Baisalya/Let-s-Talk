@@ -41,9 +41,7 @@ PreparedStatement pst;
                 HttpSession session = request.getSession();
          String email= (String) session.getAttribute("email");
         //System.out.println(email+"hey");
-         String emai = request.getParameter("email");
-         String l="lala";
-         l=emai;
+
         }
     }
 
@@ -62,8 +60,10 @@ PreparedStatement pst;
         response.setContentType("text/html");
          HttpSession session = request.getSession(false);
           PrintWriter out = response.getWriter();
-            String uemail = request.getParameter("email");
+            String uemail = request.getParameter("useremail");
             String uname=request.getParameter("username");
+            String fullname=request.getParameter("fullName");
+            String UserEmail=request.getParameter("eMail");
              String email= (String) session.getAttribute("email");
             String name=(String) session.getAttribute("name");
         //response.sendRedirect("Profile.html");
@@ -74,10 +74,8 @@ PreparedStatement pst;
              //Connection connectDB=connow.getCon();
              pst=connectDB.prepareStatement(userdetail);
             ResultSet rs=pst.executeQuery();
-         
-                         if (rs.next()==false){
+                         if (rs.next()== false){
                     //name= resultSet.getString("name");
-                    
                      // uemail=email;
                      // name=uname;
                      // out.print(email);
@@ -87,25 +85,37 @@ PreparedStatement pst;
                  //System.out.print(name+"sucess");
                 // out.println(session.getAttribute(email));
                 }else{
-                     response.sendRedirect("Profile.html");
-                     session.setAttribute("email",email);
-                 session.setAttribute("name",name);
-                 System.out.print(name+"sucess");
-                     String u_email=rs.getString("email");
-                    String u_name=rs.getString("name");
+                     //response.sendRedirect("Profile.jsp");
+                     session.setAttribute("email","email");
+                     session.setAttribute("name",name);
+                     String username=rs.getString(2);
+                     String useremail=rs.getString(3);
+                         System.out.print("sucess");
+                         out.println(username);
+                     request.setAttribute("name",username);
+                     request.setAttribute("email", useremail);
+                    // fullname.equals("username");
+                     request.getRequestDispatcher("Profile.jsp").forward(request, response);
+                   
+                   //  String u_email=rs.getString("email");
+                   // String u_name=rs.getString("name");
+                    //uname=rs.getString(name);
+                    //uemail=rs.getString(email);
+                  //  fullname=rs.getString("name");
+                   // UserEmail=rs.getString(email);
                     //
                     
                      
-// out.println("Incorrect login credentials");
-                 //   alert.setHeaderText("Look, an Information Dialog");
+                    
+                
 
-                }
+                         }       
             
         }catch (Exception e){
-            // throw new ServletException("login faild",e);
-            
+             throw new ServletException("login faild",e);
+                    
         } 
-        
+         
         
         
         
