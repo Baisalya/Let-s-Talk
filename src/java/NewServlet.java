@@ -17,11 +17,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author baish
  */
+//@WebServlet("/NewServlet")
 public class NewServlet extends HttpServlet {
 
  
@@ -37,9 +39,12 @@ public class NewServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
+        HttpSession session = request.getSession(true);
         PrintWriter out = response.getWriter();
         String email = request.getParameter("email");
         String pass = request.getParameter("pass");
+        String name;
+        
          dbconnection connow=new dbconnection();
         Connection connectDB=connow.getCon();
         String Loginveryfy="Select * from user where email='"+email+"' and password='"+pass+"'";
@@ -54,11 +59,15 @@ public class NewServlet extends HttpServlet {
    try {
             Statement statement=connectDB.createStatement();
             ResultSet resultSet=statement.executeQuery(Loginveryfy);
+         
             while (resultSet.next()){
                 if (resultSet.getInt(1)==1){
-                 response.sendRedirect("home.html");
-                 //out.println("Correct login credentials"+email);
-
+                    name= resultSet.getString("name");
+                      response.sendRedirect("home.html");
+                    //out.println("Correct login credentials"+email);
+                 session.setAttribute("email",email);
+                 session.setAttribute("name",name);
+                // out.println(session.getAttribute(email));
                 }else{
                     out.println("Incorrect login credentials");
                  //   alert.setHeaderText("Look, an Information Dialog");
@@ -66,7 +75,7 @@ public class NewServlet extends HttpServlet {
                 }
             }
         }catch (Exception e){
-             //throw new ServletException("login faild",e);
+            // throw new ServletException("login faild",e);
             
         } 
          } 
