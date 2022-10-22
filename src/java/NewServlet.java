@@ -47,7 +47,7 @@ public class NewServlet extends HttpServlet {
         
          dbconnection connow=new dbconnection();
         Connection connectDB=connow.getCon();
-        String Loginveryfy="Select count(1) from user where email='"+email+"' and password='"+pass+"'";
+        String Loginveryfy="Select * from user where email='"+email+"' and password='"+pass+"'";
         if(email.isEmpty()){
         out.println("username cant be empty");
       
@@ -62,11 +62,11 @@ public class NewServlet extends HttpServlet {
          
             while (resultSet.next()){
                 if (resultSet.getInt(1)==1){
-                    //name= resultSet.getString("name");
+                    name= resultSet.getString("name");
                       response.sendRedirect("home.html");
                     //out.println("Correct login credentials"+email);
                  session.setAttribute("email",email);
-                 //session.setAttribute("name",name);
+                 session.setAttribute("name",name);
                 // out.println(session.getAttribute(email));
                 }else{
                     out.println("Incorrect login credentials");
