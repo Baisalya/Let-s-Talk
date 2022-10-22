@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import connection.dbconnection;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -37,12 +38,12 @@ public class NewServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        String user = request.getParameter("email");
+        String email = request.getParameter("email");
         String pass = request.getParameter("pass");
          dbconnection connow=new dbconnection();
         Connection connectDB=connow.getCon();
-        String Loginveryfy="Select count(1) from user where email='"+user+"' and password='"+pass+"'";
-        if(user.isEmpty()){
+        String Loginveryfy="Select count(1) from user where email='"+email+"' and password='"+pass+"'";
+        if(email.isEmpty()){
         out.println("username cant be empty");
       
         }  else if(pass.isEmpty()){
@@ -56,6 +57,7 @@ public class NewServlet extends HttpServlet {
             while (resultSet.next()){
                 if (resultSet.getInt(1)==1){
                  response.sendRedirect("home.html");
+                 //out.println("Correct login credentials"+email);
 
                 }else{
                     out.println("Incorrect login credentials");
@@ -64,7 +66,7 @@ public class NewServlet extends HttpServlet {
                 }
             }
         }catch (Exception e){
-             //throw new ServletException("login faild",e);
+             throw new ServletException("login faild",e);
             
         } 
          } 
