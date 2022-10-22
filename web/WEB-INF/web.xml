@@ -24,6 +24,10 @@
         <servlet-name>ChatServlet</servlet-name>
         <servlet-class>ChatServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ShowUserDeatails</servlet-name>
+        <servlet-class>ShowUserDeatails</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>NewServlet</servlet-name>
         <url-pattern>/NewServlet</url-pattern>
@@ -50,6 +54,10 @@
     <servlet-mapping>
         <servlet-name>ChatServlet</servlet-name>
         <url-pattern>/ChatServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowUserDeatails</servlet-name>
+        <url-pattern>/ShowUserDeatails</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

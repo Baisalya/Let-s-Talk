@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author baish
  */
-public class UpdateUser extends HttpServlet {
+public class ShowUserDeatails extends HttpServlet {
 PreparedStatement pst;
     //String email;
     
@@ -85,7 +85,7 @@ PreparedStatement pst;
                  //System.out.print(name+"sucess");
                 // out.println(session.getAttribute(email));
                 }else{
-                     //response.sendRedirect("Profile.jsp");
+                    // response.sendRedirect("Profile.jsp");
                      session.setAttribute("email","email");
                      session.setAttribute("name",name);
                      String username=rs.getString(2);
