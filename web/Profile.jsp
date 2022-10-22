@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Profile Page</title>
+    <title>lets talk </title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
@@ -42,17 +42,12 @@
                     <div class="user-avatar">
                         <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin">
                     </div>
-<<<<<<< HEAD
-                    <h5 class="user-name" name="username"></h5>
-                    <h6 class="user-email">rituparna@gmail.com</h6>
-=======
-                    <h5 class="user-name" name="username"id="username"><%request.getAttribute()%></h5>
-                    <h6 class="user-email"name="useremail"id="useremail"/>
->>>>>>> origin/master
+                    <h5 class="user-name" name="username"id="username"><%= request.getAttribute("name")%></h5>
+                    <h6 class="user-email"name="useremail"id="useremail"><%= request.getAttribute("email")%></h6>
                 </div>
                 <div class="about">
                     <h5>Bio</h5>
-                    <p>I'm hello. Full Stack Designer I enjoy creating user-centric, delightful and human experiences.</p>
+                    <p>I'm <%= request.getAttribute("name")%>. Full Stack Designer I enjoy creating user-centric, delightful and human experiences.</p>
                 </div>
             </div>
         </div>
@@ -68,13 +63,14 @@
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="form-group">
                         <label for="fullName" >Full Name</label>
-                        <input type="text" class="form-control" id="fullName" placeholder="Enter full name">
+                        <h5 class="user-name" name="username"id="username"><%= request.getAttribute("name")%></h5>
+                           
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="form-group">
                         <label for="eMail">Email</label>
-                        <input type="email" class="form-control" id="eMail" placeholder="Enter email ID">
+                        <h5 class="user-email"name="useremail"id="useremail"><%= request.getAttribute("email")%></h5>
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -98,7 +94,7 @@
                     <div class="form-group">
                         <label for="Street">Location</label>
                         <input type="name" class="form-control" id="Street" placeholder="Enter your location">
-
+                        
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -122,14 +118,16 @@
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="form-group">
                         <label for="sts">Relationship</label>
-                        <select style="height: 32px;padding-top: 3px;padding-bottom: 3px;font-size: 12px;width: 100%;">
-                            
-                                <option value="" disabled selected hidden>Select your gender </option>
-                                <option value="single" >Single </option>
-                                <option value="relation">In An Relationship </option>
-                                <option value="married">Married</option>
-                                                                                              
-                            
+                        <select style="height: 30px;padding-top: 3px;padding-bottom: 3px;font-size: 12px;width: 100%;">
+                            <optgroup label="This is a group">
+                                <option value="12" selected>Select </option>
+                                <option value="12" selected>Single </option>
+                                <option value="12" selected>In An Relationship </option>
+                                <option value="12" selected>Married </option>
+                                
+                                
+                                
+                            </optgroup>
                         </select>   
                     </div>
                   
