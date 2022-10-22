@@ -3,15 +3,14 @@ package connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 
 public class dbconnection {
-    private static dbconnection instance;
+
    public Connection con;
    public Connection getCon(){
        String dbname="letstalk?useSSL=false";
        String user="root";
-       String password="";
+       String password="Kunmun@2001";
        String url="jdbc:mysql://localhost:3306/"+dbname;
        try {
            Class.forName("com.mysql.cj.jdbc.Driver");
@@ -23,16 +22,4 @@ public class dbconnection {
        }
        return con;
    }
-    public Connection getConnection() {
-        return con;
-    }
-    public static dbconnection getInstance() throws SQLException {
-        if (instance == null) {
-            instance = new dbconnection();
-        } else if (instance.getConnection().isClosed()) {
-            instance = new dbconnection();
-        }
-
-        return instance;
-    }
 }
