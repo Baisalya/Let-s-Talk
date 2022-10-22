@@ -25,8 +25,7 @@
         <servlet-class>ChatServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SignoutServlet</servlet-name>
-        <servlet-class>SignoutServlet</servlet-class>
+
     </servlet>
     <servlet-mapping>
         <servlet-name>NewServlet</servlet-name>
@@ -56,8 +55,7 @@
         <url-pattern>/ChatServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>SignoutServlet</servlet-name>
-        <url-pattern>/SignoutServlet</url-pattern>
+
     </servlet-mapping>
     <session-config>
         <session-timeout>
