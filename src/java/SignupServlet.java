@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import Dao.UserDAO;
 import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import connection.dbconnection;
 import java.io.IOException;
@@ -16,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.User;
 
 /**
  *
@@ -40,10 +42,52 @@ private static final Pattern password_pattern=
         PrintWriter out = response.getWriter();
         String name = request.getParameter("name");
         String email=request.getParameter("email");
-        String pass = request.getParameter("pass");
-        Matcher match=password_pattern.matcher(pass);
-        String regex="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{6}$";
-         dbconnection connow=new dbconnection();
+        String password = request.getParameter("pass");
+       // Matcher match=password_pattern.matcher(password);
+       // String regex="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{6}$";
+   boolean status = true;
+   	if (name.equals("")) {
+			request.setAttribute("fmsg", "First name is required ");
+                        out.println("name is required");
+			status = false;
+                        
+		}
+		
+		if(email.equals("")) {
+			request.setAttribute("emsg", "Email is required ");
+                        out.println("email is required");
+			status = false;
+		}
+		if(password.equals("")) {
+			request.setAttribute("pmsg", "Password is required ");
+                        out.println("password is required");
+			status = false;
+		}
+		
+		if(!status) {
+			request.setAttribute("page", "register");
+			//request.getRequestDispatcher("index.html").forward(request, response);
+		} else {
+			UserDAO userDAO = new UserDAO();
+			User user = new User();
+			user.setPassword(password);
+			user.setName(name);
+			user.setEmail(email);
+			String result = userDAO.register(user);
+			request.setAttribute("rmsg", result);
+			request.setAttribute("page", "register");
+			request.getRequestDispatcher("index.html").forward(request, response);
+
+		}
+        
+        
+        
+        
+        
+        
+        
+        
+        /**  dbconnection connow=new dbconnection();
         Connection connectDB=connow.getCon();
         String Signupquerry="insert into user(name,email,password)values('";
         String insertfield=name+"','"+email +"','"+ pass +"')";
@@ -68,7 +112,7 @@ private static final Pattern password_pattern=
         }catch (Exception e){
           // throw new ServletException("Signup faild",e);
         }
-    }
+    } **/
 
     /**
      * Returns a short description of the servlet.

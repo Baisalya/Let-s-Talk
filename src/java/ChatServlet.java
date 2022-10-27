@@ -4,12 +4,26 @@
  * and open the template in the editor.
  */
 
+
+import Dao.UserDAO;
+import connection.dbconnection;
+import dao.MessageDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.Message;
+import model.User;
 
 /**
  *
@@ -55,7 +69,35 @@ public class ChatServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       // processRequest(request, response);
+                  response.setContentType("text/html");
+        HttpSession session = request.getSession(true);
+        PrintWriter out = response.getWriter();
+         String name;
+        int user_id;
+          dbconnection connow=new dbconnection();
+          Connection connectDB=connow.getCon();
+           String qry="Select * from user ";
+              try {
+            Statement statement=connectDB.createStatement();
+            ResultSet resultSet=statement.executeQuery(qry);
+         
+            while (resultSet.next()){
+                
+                    user_id=resultSet.getInt(1);
+                    
+                    name= resultSet.getString("name");
+                  System.out.print(user_id+name);
+                // out.println(session.getAttribute(email));
+              
+            }
+        }catch (Exception e){
+
+             throw new ServletException("login faild",e);
+
+          
+            
+        } 
         
     }
 
@@ -70,7 +112,7 @@ public class ChatServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        doGet(request, response);
     }
 
     /**

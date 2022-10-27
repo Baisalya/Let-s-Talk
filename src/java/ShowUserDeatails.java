@@ -38,7 +38,7 @@ PreparedStatement pst;
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-                HttpSession session = request.getSession();
+          HttpSession session = request.getSession();
          String email= (String) session.getAttribute("email");
         //System.out.println(email+"hey");
 
@@ -112,7 +112,7 @@ PreparedStatement pst;
                          }       
             
         }catch (Exception e){
-             throw new ServletException("login faild",e);
+             throw new ServletException("",e);
                     
         } 
          
@@ -149,7 +149,7 @@ PreparedStatement pst;
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        doGet(request, response);
         
     }
 

@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+
+import Dao.UserDAO;
 import connection.dbconnection;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.User;
 
 /**
  *
@@ -28,7 +31,21 @@ public class NewServlet extends HttpServlet {
 
  
     private static final long serialVersionUID = 1L;
-
+    
+    
+    	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession(false);
+		if (session != null && session.getAttribute("user_id") != null) {
+			response.sendRedirect("home.html");
+		} else {
+			request.getRequestDispatcher("index.html").forward(request, response);
+		}
+	}
+public NewServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
     /**
      *
      * @param request
@@ -39,13 +56,39 @@ public class NewServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
-        HttpSession session = request.getSession(true);
+      //  HttpSession session = request.getSession(true);
         PrintWriter out = response.getWriter();
         String email = request.getParameter("email");
-        String pass = request.getParameter("pass");
-        String name;
+        String password = request.getParameter("pass");
+      //  String name;
+       // int user_id;
+        		boolean status = true;
+//		request.removeAttribute("msg");
+
+			UserDAO userDAO = new UserDAO();
+			boolean res = userDAO.login(email, password);
+
+			if (res) {
+				try {
+					User user = userDAO.getUserByEmail(email);
+					HttpSession session = request.getSession(true);
+					//session.setMaxInactiveInterval(1800);
+					session.setAttribute("user_id", user.getUser_id());
+					response.sendRedirect("home.html");
+				} catch (SQLException e) {
+					e.printStackTrace();
+					//request.setAttribute("page", "login");
+					//request.setAttribute("msg", "Login Failed.");
+					request.getRequestDispatcher("index.html").forward(request, response);
+				}
+			} else {
+				request.setAttribute("page", "login");
+				request.setAttribute("msg", "Login Failed.");
+				request.getRequestDispatcher("index.html").forward(request, response);
+			}
+		
         
-         dbconnection connow=new dbconnection();
+      /**   dbconnection connow=new dbconnection();
         Connection connectDB=connow.getCon();
         String Loginveryfy="Select * from user where email='"+email+"' and password='"+pass+"'";
         if(email.isEmpty()){
@@ -62,11 +105,16 @@ public class NewServlet extends HttpServlet {
          
             while (resultSet.next()){
                 if (resultSet.getInt(1)==1){
+                    user_id=resultSet.getInt(1);
+                    
                     name= resultSet.getString("name");
                       response.sendRedirect("home.html");
+                      //response.sendRedirect("header.jsp");
                     //out.println("Correct login credentials"+email);
-                 session.setAttribute("email",email);
-                 session.setAttribute("name",name);
+                    session.setAttribute("user_id",user_id);
+                   // System.out.print(id);
+                   session.setAttribute("email",email);
+                   session.setAttribute("name",name);
                 // out.println(session.getAttribute(email));
                 }else{
                     out.println("Incorrect login credentials");
@@ -81,7 +129,7 @@ public class NewServlet extends HttpServlet {
           
             
         } 
-         } 
+         } **/
      /**   if(user.isEmpty() || pass.isEmpty()){
         out.println("username and password cant be empty");
         }else{
