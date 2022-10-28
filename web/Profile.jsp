@@ -70,15 +70,15 @@
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="form-group">
                         <label for="fullName" >Full Name</label>
-                        <h5 class="user-name" name="username"id="username"><%=new UserDAO().getUserById((Integer) session.getAttribute("user_id")).getName()%></h5>
-                           
+                        <input type="text" class="form-control" id="fullName"required value="<%=new UserDAO().getUserById((Integer) session.getAttribute("user_id")).getName()%>">
+                                                   
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="form-group">
                         <label for="eMail">Email</label>
-                        <h5 class="user-email"name="useremail"id="useremail"><%=new UserDAO().getUserById((Integer) session.getAttribute("user_id")).getEmail()%></h5>
-                    </div>
+                        <input type="email" class="form-control" id="eMail"  required value="<%=new UserDAO().getUserById((Integer) session.getAttribute("user_id")).getEmail()%>">
+                       </div>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="form-group">
