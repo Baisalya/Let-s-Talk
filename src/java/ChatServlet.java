@@ -73,7 +73,9 @@ public class ChatServlet extends HttpServlet {
                   response.setContentType("text/html");
         HttpSession session = request.getSession(true);
         PrintWriter out = response.getWriter();
-         String name;
+   
+        
+        /**     String name;
         int user_id;
           dbconnection connow=new dbconnection();
           Connection connectDB=connow.getCon();
@@ -97,7 +99,7 @@ public class ChatServlet extends HttpServlet {
 
           
             
-        } 
+        } **/
         
     }
 

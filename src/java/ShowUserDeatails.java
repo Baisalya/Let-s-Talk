@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import Dao.UserDAO;
 import connection.dbconnection;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.User;
 
 /**
  *
@@ -59,62 +61,19 @@ PreparedStatement pst;
             throws ServletException, IOException {
         response.setContentType("text/html");
          HttpSession session = request.getSession(false);
+         if (session == null || session.getAttribute("user_id") == null) {
+			response.sendRedirect("login");
+			return;
+		}
           PrintWriter out = response.getWriter();
-            String uemail = request.getParameter("useremail");
-            String uname=request.getParameter("username");
-            String fullname=request.getParameter("fullName");
+           // String uemail = request.getParameter("useremail");
+           // String uname=request.getParameter("username");
+           // String fullname=request.getParameter("fullName");
             String UserEmail=request.getParameter("eMail");
              String email= (String) session.getAttribute("email");
             String name=(String) session.getAttribute("name");
         //response.sendRedirect("Profile.html");
-           dbconnection connow=new dbconnection();
-           Connection connectDB=connow.getCon();
-         String userdetail="Select * from user where email='"+email+"' and name='"+name+"'";
-         try {
-             //Connection connectDB=connow.getCon();
-             pst=connectDB.prepareStatement(userdetail);
-            ResultSet rs=pst.executeQuery();
-                         if (rs.next()== false){
-                    //name= resultSet.getString("name");
-                     // uemail=email;
-                     // name=uname;
-                     // out.print(email);
-                    //out.println("Correct login credentials"+email);
-                // session.setAttribute("email",email);
-                 //session.setAttribute("name",name);
-                 //System.out.print(name+"sucess");
-                // out.println(session.getAttribute(email));
-                }else{
-                    // response.sendRedirect("Profile.jsp");
-                     session.setAttribute("email","email");
-                     session.setAttribute("name",name);
-                     String username=rs.getString(2);
-                     String useremail=rs.getString(3);
-                         System.out.print("sucess");
-                         out.println(username);
-                     request.setAttribute("name",username);
-                     request.setAttribute("email", useremail);
-                    // fullname.equals("username");
-                     request.getRequestDispatcher("Profile.jsp").forward(request, response);
-                   
-                   //  String u_email=rs.getString("email");
-                   // String u_name=rs.getString("name");
-                    //uname=rs.getString(name);
-                    //uemail=rs.getString(email);
-                  //  fullname=rs.getString("name");
-                   // UserEmail=rs.getString(email);
-                    //
-                    
-                     
-                    
-                
-
-                         }       
-            
-        }catch (Exception e){
-             throw new ServletException("",e);
-                    
-        } 
+      
          
         
         
@@ -150,10 +109,37 @@ PreparedStatement pst;
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request, response);
-        
+             HttpSession session = request.getSession(false);
+          //  String fullname=request.getParameter("fullName").trim();
+           // String UserEmail=request.getParameter("eMail").trim();
+            	if (session == null || session.getAttribute("user_id") == null) {
+			response.sendRedirect("login");
+			return;
+		}
+		
+		String type = request.getParameter("type");
+		
+		if(type.equals("change_profile")) {
+			String fullname=request.getParameter("fullName").trim();
+                        String UserEmail=request.getParameter("eMail").trim();
+			
+			if(fullname.equals("") || UserEmail.equals("")) {
+				request.setAttribute("pmsg", "Type all required fields.");
+				doGet(request, response);
+			} else {
+				UserDAO userDAO = new UserDAO();
+				User user = new User();
+				user.setUser_id((int) session.getAttribute("user_id"));
+				user.setName(fullname);
+				user.setEmail(UserEmail);
+				String result = userDAO.updateProfile(user);
+				request.setAttribute("pmsg", result);
+				doGet(request, response);
+			}
+            
     }
 
-    /**
+    }/**
      * Returns a short description of the servlet.
      *
      * @return a String containing servlet description
@@ -161,6 +147,7 @@ PreparedStatement pst;
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
+    // </editor-fold>
 
 }

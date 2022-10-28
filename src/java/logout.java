@@ -25,9 +25,9 @@ public class logout extends HttpServlet {
          HttpSession session = request.getSession(false);
       // String email=session.getAttribute("email").toString();
       // out.println(email);
-          session.invalidate();
-          response.sendRedirect("index.html");
-        response.setContentType("text/html;charset=UTF-8");
+         // session.invalidate();
+         // response.sendRedirect("index.html");
+       // response.setContentType("text/html;charset=UTF-8");
      
     }
 
@@ -43,7 +43,19 @@ public class logout extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       // processRequest(request, response);
+        HttpSession session=request.getSession(false);
+		if (session == null || session.getAttribute("user_id") == null) {
+			response.sendRedirect("index.html");
+			return;
+		}
+		
+		session.removeAttribute("user_id");
+	    session.getMaxInactiveInterval();
+	    
+	    response.setHeader("Cache-Control", "no-cache, no-store");
+	    response.setHeader("Pragma", "no-cache");
+	    response.sendRedirect("index.html");
     }
 
     /**

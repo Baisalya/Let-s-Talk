@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="assets/css/Simple-Slider.css">
     <link rel="stylesheet" href="assets/css/Testimonials.css">
 </head>
-
+<%@include file="header.jsp" %>
 <body><div class="bootstrap_chat">
 <div class="container py-5 px-4">
   <!-- For demo purpose-->

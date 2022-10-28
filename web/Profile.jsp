@@ -31,7 +31,13 @@
 </head>
 
 <body>
-   
+    <%@include file="header.jsp" %>
+   <%@ page import="Dao.UserDAO"%>
+<%
+	if (session == null || session.getAttribute("user_id") == null) {
+		response.sendRedirect("login");
+	}
+%>
     <form action="Updateuser.java" method="post">
     <div class="container">
     <div class="row gutters">
@@ -43,12 +49,12 @@
                     <div class="user-avatar">
                         <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin">
                     </div>
-                    <h5 class="user-name" name="username"id="username"><%= request.getAttribute("name")%></h5>
-                    <h6 class="user-email"name="useremail"id="useremail"><%= request.getAttribute("email")%></h6>
+                    <h5 class="user-name" name="username"id="username"><%= new UserDAO().getUserById((Integer) session.getAttribute("user_id")).getName() %></h5>
+                    <h6 class="user-email"name="useremail"id="useremail"><%= new UserDAO().getUserById((Integer) session.getAttribute("user_id")).getEmail() %></h6>
                 </div>
                 <div class="about">
                     <h5>Bio</h5>
-                    <p>I'm <%= request.getAttribute("name")%>. Full Stack Designer I enjoy creating user-centric, delightful and human experiences.</p>
+                    <p>I'm <%= new UserDAO().getUserById((Integer) session.getAttribute("user_id")).getName()%>. Full Stack Designer I enjoy creating user-centric, delightful and human experiences.</p>
                 </div>
             </div>
         </div>
@@ -64,14 +70,14 @@
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="form-group">
                         <label for="fullName" >Full Name</label>
-                        <h5 class="user-name" name="username"id="username"><%= request.getAttribute("name")%></h5>
+                        <h5 class="user-name" name="username"id="username"><%=new UserDAO().getUserById((Integer) session.getAttribute("user_id")).getName()%></h5>
                            
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="form-group">
                         <label for="eMail">Email</label>
-                        <h5 class="user-email"name="useremail"id="useremail"><%= request.getAttribute("email")%></h5>
+                        <h5 class="user-email"name="useremail"id="useremail"><%=new UserDAO().getUserById((Integer) session.getAttribute("user_id")).getEmail()%></h5>
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
