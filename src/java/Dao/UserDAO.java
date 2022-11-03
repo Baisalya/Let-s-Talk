@@ -82,7 +82,23 @@ public class UserDAO {
 		}
 		return u;
 	}
-	
+   public  ArrayList<User> getAllUsers(int id)throws SQLException {  
+          
+       Connection conn = dbconnection.getInstance().getConnection();  
+        PreparedStatement st = conn.prepareStatement("select * from user");  
+        st.setInt(1, id);
+        ResultSet rs=st.executeQuery(); 
+         ArrayList<User> array=new ArrayList<User>(); 
+        while(rs.next()){  
+            User u=new User();  
+            u.setUser_id(rs.getInt("id"));  
+            u.setName(rs.getString("name"));  
+            u.setEmail(rs.getString("email"));  
+            array.add(u);  
+        }  
+      
+    return array;  
+} 
     	public ArrayList<User> getUsersForChat(int id) throws SQLException {
 		Connection conn = dbconnection.getInstance().getConnection();
 		PreparedStatement st = conn.prepareStatement("SELECT * FROM user WHERE user_id <> ?");
@@ -109,9 +125,11 @@ public class UserDAO {
 			st.setInt(3, user.getUser_id());
 			st.execute();
 			return "Profile Update Successful.";
-		} catch (MySQLIntegrityConstraintViolationException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return "Email alreay used.";
 		} 
 	}
+
+ 
 }
