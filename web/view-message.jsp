@@ -90,7 +90,7 @@ if (session == null || session.getAttribute("user_id") == null) {
 						<div class="row justify-content-end">
 						<div class="col-8 alert alert-primary" role="alert">
 							<h5>
-								me <a href="ViewMessageServlet=<%= request.getAttribute("to_user") %>&delete=<%= messages.get(i).getChat_id() %>" class="card-link" style="float: right;"><i
+								me <a href="ViewMessageServlet?id=<%= request.getAttribute("to_user") %>&delete=<%= messages.get(i).getChat_id() %>" class="card-link" style="float: right;"><i
 									style="color: red;" class="far fa-trash-alt"></i></a>
 							</h5>
 							 <%= messages.get(i).getMessage() %>
