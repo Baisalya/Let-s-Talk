@@ -7,7 +7,7 @@ package model;
 
 /**
  *
- * @author baish
+ * @author baishalya
  */
 public class User {
     private int user_id;
@@ -78,8 +78,6 @@ this.ans=ans;
     public void setAns(String ans) {
         this.ans = ans;
     }
-
-
 
 
 }
