@@ -72,14 +72,8 @@ PreparedStatement pst;
             String UserEmail=request.getParameter("eMail");
              String email= (String) session.getAttribute("email");
             String name=(String) session.getAttribute("name");
-        //response.sendRedirect("Profile.html");
-      
-         
-        
-        
-        
-        
-        /**  try{
+        //response.sendRedirect("Profile.html");      
+                           /**  try{
             
             response.setContentType("text/html");
             PrintWriter out =response.getWriter();
@@ -109,16 +103,15 @@ PreparedStatement pst;
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request, response);
+         response.setContentType("text/html");
              HttpSession session = request.getSession(false);
-          //  String fullname=request.getParameter("fullName").trim();
+            //String fullname=request.getParameter("fullName").trim();
            // String UserEmail=request.getParameter("eMail").trim();
             	if (session == null || session.getAttribute("user_id") == null) {
 			response.sendRedirect("login");
 			return;
-		}
-		
+		}		
 		String type = request.getParameter("type");
-		
 		if(type.equals("change_profile")) {
 			String fullname=request.getParameter("fullName").trim();
                         String UserEmail=request.getParameter("eMail").trim();
@@ -133,7 +126,8 @@ PreparedStatement pst;
 				user.setName(fullname);
 				user.setEmail(UserEmail);
 				String result = userDAO.updateProfile(user);
-				request.setAttribute("pmsg", result);
+				//request.setAttribute("pmsg", result);
+                                response.sendRedirect("Profile.jsp");
 				doGet(request, response);
 			}
             

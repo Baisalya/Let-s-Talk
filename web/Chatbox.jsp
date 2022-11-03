@@ -4,7 +4,8 @@
     Author     : baish
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.awt.List"%>
+<%@page contentType="text/html" language="java" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
@@ -37,6 +38,16 @@
     <link rel="stylesheet" href="assets/css/Testimonials.css">
 </head>
 <%@include file="header.jsp" %>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="model.Message"%>
+<%@ page import="model.User"%>
+<%@ page import="Dao.UserDAO"%>
+<%@page import="java.util.*"%>
+<%
+if (session == null || session.getAttribute("user_id") == null) {
+	response.sendRedirect("login");
+}
+%>
 <body><div class="bootstrap_chat">
 <div class="container py-5 px-4">
   <!-- For demo purpose-->
@@ -51,9 +62,16 @@
 
         <div class="bg-gray px-4 py-2 bg-light">
           <p class="h5 mb-0 py-1">Recent</p>
-        </div>
-       
+        </div>		
         <div class="messages-box">
+         <%
+	ArrayList<User> newUsers = (ArrayList<User>) request.getAttribute("newUsers");
+	
+	for (int i = 0; i < newUsers.size(); i++) {
+            
+	%>
+        <%=newUsers.get(i).getName() %>
+        }
           <div class="list-group rounded-0">
             <a class="list-group-item list-group-item-action active text-white rounded-0">
               <div class="media">
@@ -74,6 +92,8 @@
     <!-- Chat Box-->
     <div class="col-7 px-0">
       <div class="px-4 py-5 chat-box bg-white">
+          
+        
         <!-- Sender Message-->
         <div class="media w-50 mb-3"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle">
           <div class="media-body ml-3">
@@ -100,7 +120,8 @@
       <!-- Typing area -->
       <form action="ViewMessageServlet" method="post" class="bg-light">
         <div class="input-group">
-            <input type="text" placeholder="Type a message" id="to_user" aria-describedby="button-addon2" class="form-control rounded-0 border-0 py-4 bg-light">
+            <input type="hidden" name="to_user" value="<%=request.getAttribute("to_user")%>" /> 
+            <input type="text" placeholder="Type a message" name="message" aria-describedby="button-addon2" class="form-control rounded-0 border-0 py-4 bg-light">
           <div class="input-group-append">
             <button id="button-addon2" type="submit" class="btn btn-link"> <i class="fa fa-paper-plane"></i></button>
           </div>

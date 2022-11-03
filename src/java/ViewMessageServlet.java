@@ -12,23 +12,20 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import Dao.MessageDAO;
-import Dao.UserDAO;
 import model.Message;
-import model.User;
 
 /**
- * Servlet implementation class MessageServlet
+ * Servlet implementation class ViewMessage
  */
-@WebServlet("/MessageServlet")
-public class MessageServlet extends HttpServlet {
+@WebServlet("/ViewMessage")
+public class ViewMessageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MessageServlet() {
+    public ViewMessageServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -41,36 +38,52 @@ public class MessageServlet extends HttpServlet {
 			return;
 		}
 		
-		UserDAO userDAO = new UserDAO();
 		MessageDAO messageDAO = new MessageDAO();
-		
 		if(request.getParameter("delete") != null) {
 			try {
-				messageDAO.deleteAllMessage((int) session.getAttribute("user_id"), Integer.parseInt(request.getParameter("delete")));
+				messageDAO.deleteMessage(Integer.parseInt(request.getParameter("delete")));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 		
-		ArrayList<User> users = new ArrayList<>();
+		int to_userID = -99;
 		ArrayList<Message> messages = new ArrayList<>();
 		try {
-			users = userDAO.getUsersForChat((int) session.getAttribute("user_id"));
-			messages = messageDAO.getAllMessage((int) session.getAttribute("user_id"));
-		} catch (NumberFormatException | SQLException e) {
+			to_userID = Integer.parseInt(request.getParameter("id"));
+			messages = messageDAO.getMessage((int) session.getAttribute("user_id"), to_userID);
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		request.setAttribute("to_user", to_userID);
 		request.setAttribute("messages", messages);
-		request.setAttribute("newUsers", users);
-		request.getRequestDispatcher("message.jsp").forward(request, response);
+		request.getRequestDispatcher("view-message.jsp").forward(request, response);
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		HttpSession session = request.getSession(false);
+                   response.setContentType("text/html");
+		if (session == null || session.getAttribute("user_id") == null) {
+			response.sendRedirect("login");
+			return;
+		}
+		
+		String message = request.getParameter("message");
+		String to_user = request.getParameter("to_user");
+		
+		if (!message.trim().equals("") && !to_user.trim().equals("")) {
+			try {
+			MessageDAO messageDAO = new MessageDAO();
+			messageDAO.insertMessage(Integer.parseInt(session.getAttribute("user_id").toString()), Integer.parseInt(to_user), message);
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		response.sendRedirect("ViewMessageServlet?id=" + to_user);
 	}
 
 }

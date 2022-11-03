@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="model.Message"%>
 <%@ page import="Dao.UserDAO"%>
@@ -13,7 +14,7 @@ if (session == null || session.getAttribute("user_id") == null) {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Message | Social</title>
-<link rel="shortcut icon" href="image/logo.png">
+<link rel="shortcut icon" href="assets/img/logols.jpg">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -72,7 +73,7 @@ if (session == null || session.getAttribute("user_id") == null) {
 
 <body class="bg-dark">
 
-	
+	<%@include file="header.jsp"%>
 
 	<div class="container">
 	
@@ -89,7 +90,7 @@ if (session == null || session.getAttribute("user_id") == null) {
 						<div class="row justify-content-end">
 						<div class="col-8 alert alert-primary" role="alert">
 							<h5>
-								me <a href="${pageContext.request.contextPath}/view-message?id=<%= request.getAttribute("to_user") %>&delete=<%= messages.get(i).getChat_id() %>" class="card-link" style="float: right;"><i
+								me <a href="ViewMessageServlet=<%= request.getAttribute("to_user") %>&delete=<%= messages.get(i).getChat_id() %>" class="card-link" style="float: right;"><i
 									style="color: red;" class="far fa-trash-alt"></i></a>
 							</h5>
 							 <%= messages.get(i).getMessage() %>
@@ -102,7 +103,7 @@ if (session == null || session.getAttribute("user_id") == null) {
 					<div class="row justify-content-start">
 					<div class="col-8 alert alert-secondary" role="alert"">
 						<h5>
-							<%= new UserDAO().getUserById(Integer.parseInt(messages.get(i).getFrom_user())).getFirst_name() %> <a href="${pageContext.request.contextPath}/view-message?id=<%= request.getAttribute("to_user") %>&delete=<%= messages.get(i).getChat_id() %>" class="card-link" style="float: right;"><i
+							<%= new UserDAO().getUserById(Integer.parseInt(messages.get(i).getFrom_user())).getName() %> <a href="ViewMessageServlet?id=<%= request.getAttribute("to_user") %>&delete=<%= messages.get(i).getChat_id() %>" class="card-link" style="float: right;"><i
 								style="color: red;" class="far fa-trash-alt"></i></a>
 						</h5>
 						<%= messages.get(i).getMessage() %>
@@ -118,7 +119,7 @@ if (session == null || session.getAttribute("user_id") == null) {
 
 	<div class="type_msg"
 		style="padding-left: 10px; padding-right: 10px; bottom: 10px;">
-		<form method="post" action="view-message">
+		<form method="post" action="ViewMessageServlet">
 			<div class="input_msg_write">
 				<input type="hidden" name="to_user" value="<%=request.getAttribute("to_user")%>" /> 
 				<input type="text" name="message" class="write_msg" placeholder="Type a message" style="padding: 5px; border-radius: 20px; outline: none" />

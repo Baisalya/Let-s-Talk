@@ -38,8 +38,10 @@
 		response.sendRedirect("login");
 	}
 %>
-    <form action="Updateuser.java" method="post">
+    <form action="ShowUserDeatails" method="post">
+    <input type="hidden" name="type" value="change_profile">    
     <div class="container">
+         <input type="hidden" name="type" value="change_profile">  
     <div class="row gutters">
     <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
     <div class="card h-100">
@@ -68,16 +70,17 @@
                     <h6 class="mb-2 text-primary">Personal Details</h6>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    
                     <div class="form-group">
                         <label for="fullName" >Full Name</label>
-                        <input type="text" class="form-control" id="fullName"required value="<%=new UserDAO().getUserById((Integer) session.getAttribute("user_id")).getName()%>">
+                        <input type="text" class="form-control"name="fullName" id="fullName"required value="<%=new UserDAO().getUserById((Integer) session.getAttribute("user_id")).getName()%>">
                                                    
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="form-group">
                         <label for="eMail">Email</label>
-                        <input type="email" class="form-control" id="eMail"  required value="<%=new UserDAO().getUserById((Integer) session.getAttribute("user_id")).getEmail()%>">
+                        <input type="email" class="form-control" name="eMail"id="eMail"  required value="<%=new UserDAO().getUserById((Integer) session.getAttribute("user_id")).getEmail()%>">
                        </div>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">

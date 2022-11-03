@@ -1,4 +1,4 @@
-package dao;
+package Dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +13,7 @@ public class MessageDAO {
 	
 	public ArrayList<Message> getAllMessage(int id) throws SQLException {
 		Connection conn = dbconnection.getInstance().getConnection();
-		PreparedStatement st = conn.prepareStatement("SELECT * FROM message WHERE from_user = ? AND chat_time IN (SELECT MAX(chat_time) FROM message GROUP by to_user) ORDER BY chat_time DESC;");
+		PreparedStatement st = conn.prepareStatement("SELECT * FROM chat WHERE from_user = ? AND chat_time IN (SELECT MAX(chat_time) FROM message GROUP by to_user) ORDER BY chat_time DESC;");
 		st.setInt(1, id);
 		ResultSet rs = st.executeQuery();
 		ArrayList<Message> array = new ArrayList<>();
@@ -29,9 +29,10 @@ public class MessageDAO {
 		return array; 
 	}
 	
+
 	public void deleteAllMessage(int fromUserID, int toUserID) throws SQLException {
 		Connection conn = dbconnection.getInstance().getConnection();
-		PreparedStatement st = conn.prepareStatement("DELETE FROM message WHERE (from_user = ? AND to_user = ?) OR (to_user = ? AND from_user = ?);");
+		PreparedStatement st = conn.prepareStatement("DELETE FROM chat WHERE (from_user = ? AND to_user = ?) OR (to_user = ? AND from_user = ?);");
 		st.setInt(1, fromUserID);
 		st.setInt(2, toUserID);
 		st.setInt(3, fromUserID);
@@ -41,7 +42,7 @@ public class MessageDAO {
 	
 	public ArrayList<Message> getMessage(int fromUserID, int toUserID) throws SQLException {
 		Connection conn = dbconnection.getInstance().getConnection();
-		PreparedStatement st = conn.prepareStatement("SELECT * FROM message WHERE (from_user = ? OR to_user = ?) AND (from_user = ? OR to_user = ?) ORDER BY chat_time;");
+		PreparedStatement st = conn.prepareStatement("SELECT * FROM chat WHERE (from_user = ? OR to_user = ?) AND (from_user = ? OR to_user = ?) ORDER BY chat_time;");
 		st.setInt(1, fromUserID);
 		st.setInt(2, fromUserID);
 		st.setInt(3, toUserID);
@@ -62,7 +63,7 @@ public class MessageDAO {
 	
 	public void insertMessage(int fromUserID, int toUserID, String message) throws SQLException{
 		Connection conn = dbconnection.getInstance().getConnection();
-		PreparedStatement st = conn.prepareStatement("INSERT INTO message(from_user, to_user, message) VALUES (?,?,?);");
+		PreparedStatement st = conn.prepareStatement("INSERT INTO chat(from_user, to_user, message) VALUES (?,?,?);");
 		st.setInt(1, fromUserID);
 		st.setInt(2, toUserID);
 		st.setString(3, message);
@@ -71,7 +72,7 @@ public class MessageDAO {
 	
 	public void deleteMessage(int chatID) throws SQLException{
 		Connection conn = dbconnection.getInstance().getConnection();
-		PreparedStatement st = conn.prepareStatement("DELETE FROM message WHERE chat_id = ?;");
+		PreparedStatement st = conn.prepareStatement("DELETE FROM chat WHERE chat_id = ?;");
 		st.setInt(1, chatID);
 		st.executeUpdate();
 	}
@@ -79,7 +80,7 @@ public class MessageDAO {
 	public int messageCount(int from_user, int to_user) throws SQLException {
 		int count = 0;
 		Connection conn = dbconnection.getInstance().getConnection();
-		PreparedStatement st = conn.prepareStatement("SELECT COUNT(*) msg_count FROM message WHERE (from_user = ? OR to_user = ?) AND (from_user = ? OR to_user = ?);");
+		PreparedStatement st = conn.prepareStatement("SELECT COUNT(*) msg_count FROM chat WHERE (from_user = ? OR to_user = ?) AND (from_user = ? OR to_user = ?);");
 		st.setInt(1, from_user);
 		st.setInt(2, from_user);
 		st.setInt(3, to_user);

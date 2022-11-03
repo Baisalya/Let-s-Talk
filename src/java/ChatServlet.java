@@ -7,7 +7,7 @@
 
 import Dao.UserDAO;
 import connection.dbconnection;
-import dao.MessageDAO;
+import Dao.MessageDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
