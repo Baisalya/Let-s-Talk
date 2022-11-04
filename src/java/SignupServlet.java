@@ -5,7 +5,7 @@
  */
 
 import Dao.UserDAO;
-import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
+//import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import connection.dbconnection;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.User;
 
 /**
@@ -34,15 +35,24 @@ private static final Pattern password_pattern=
              "{6}"+                           
              "$");
       //Matcher match=password_pattern.matcher(request.getParameter("pass"));
-
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(false);
+		if (session != null && session.getAttribute("user_id") != null) {
+			response.sendRedirect("homePage.html");
+		} else {
+			request.setAttribute("page", "register");
+			request.getRequestDispatcher("index.html").forward(request, response);
+		}
+	}
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
                response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        String name = request.getParameter("name");
-        String email=request.getParameter("email");
-        String password = request.getParameter("pass");
+                 PrintWriter out = response.getWriter();
+               String name = request.getParameter("name").trim();
+               String email=request.getParameter("email").trim();
+               String password = request.getParameter("pass").trim();
        // Matcher match=password_pattern.matcher(password);
        // String regex="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{6}$";
    boolean status = true;
@@ -66,7 +76,7 @@ private static final Pattern password_pattern=
 		
 		if(!status) {
 			request.setAttribute("page", "register");
-			//request.getRequestDispatcher("index.html").forward(request, response);
+			request.getRequestDispatcher("index.html").forward(request, response);
 		} else {
 			UserDAO userDAO = new UserDAO();
 			User user = new User();
@@ -74,9 +84,10 @@ private static final Pattern password_pattern=
 			user.setName(name);
 			user.setEmail(email);
 			String result = userDAO.register(user);
-			request.setAttribute("rmsg", result);
-			request.setAttribute("page", "register");
-			request.getRequestDispatcher("index.html").forward(request, response);
+			//request.setAttribute("rmsg", result);
+			//request.setAttribute("page", "register");
+			//request.getRequestDispatcher("index.html").forward(request, response);
+                        response.sendRedirect("index.html");
 
 		}
         

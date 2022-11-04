@@ -67,7 +67,6 @@ if (session == null || session.getAttribute("user_id") == null) {
 			if(messages.size() == 0){
 				%><h4 style="text-align: center; color: #ffffff;">No Messages dude.</h4><%
 			}
-			
 			for(int i=0; i<messages.size(); i++){
 				if(messages.get(i).getFrom_user().equals(session.getAttribute("user_id").toString())){
 					%>
