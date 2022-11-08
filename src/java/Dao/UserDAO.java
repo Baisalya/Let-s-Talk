@@ -40,10 +40,10 @@ public class UserDAO {
         	public String register(User user) {
 		try {
 			Connection conn = dbconnection.getInstance().getConnection();
-			PreparedStatement st = conn.prepareStatement("INSERT INTO user(name, email, password) VALUES (?, ?, ?, ?);");
+			PreparedStatement st = conn.prepareStatement("INSERT INTO user(name, email, password) VALUES (?, ?, ?);");
 			st.setString(1, user.getName());
-			st.setString(3, user.getEmail());
-			st.setString(4, user.getPassword());
+			st.setString(2, user.getEmail());
+			st.setString(3, user.getPassword());
 			st.execute();
 			return "Registration Successful.";
 		} catch (Exception e) {
