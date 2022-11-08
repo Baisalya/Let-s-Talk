@@ -17,7 +17,11 @@ import model.Message;
 /**
  * Servlet implementation class ViewMessage
  */
-@WebServlet("/ViewMessage")
+/**
+ *
+ * @author baishalya
+ */
+
 public class ViewMessageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

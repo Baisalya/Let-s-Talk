@@ -15,18 +15,21 @@ if (session == null || session.getAttribute("user_id") == null) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Message | LetsTalk</title>
+<title>Message||LetsTalk</title>
 <link rel="shortcut icon" href="assets/img/logols.jpg">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
 <style>
+    
 	.container {
 	    margin-top: 120px;
+          
 	}
 	
 	@media (max-width:800px){
 		.container {
 	    	margin-top: 240px !important;
+                   background-image:url('assets/bg.png');
 		}
 	}
 	
@@ -50,7 +53,9 @@ if (session == null || session.getAttribute("user_id") == null) {
 	
 	#newMessageBtn:hover {
 		background-color: #0373b7;
+               
 	}
+        
 </style>
 </head>
 <body class="bg-dark">

@@ -49,7 +49,7 @@ private static final Pattern password_pattern=
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
                response.setContentType("text/html");
-                 PrintWriter out = response.getWriter();
+               PrintWriter out = response.getWriter();
                String name = request.getParameter("name").trim();
                String email=request.getParameter("email").trim();
                String password = request.getParameter("pass").trim();
@@ -78,12 +78,12 @@ private static final Pattern password_pattern=
 			request.setAttribute("page", "register");
 			request.getRequestDispatcher("index.html").forward(request, response);
 		} else {
-			UserDAO userDAO = new UserDAO();
+			UserDAO usersDAO = new UserDAO();
 			User user = new User();
 			user.setPassword(password);
 			user.setName(name);
 			user.setEmail(email);
-			String result = userDAO.register(user);
+			String result = usersDAO.register(user);
 			//request.setAttribute("rmsg", result);
 			//request.setAttribute("page", "register");
 			//request.getRequestDispatcher("index.html").forward(request, response);

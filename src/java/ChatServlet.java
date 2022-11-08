@@ -27,7 +27,7 @@ import model.User;
 
 /**
  *
- * @author baish
+ * @author baishalya
  */
 public class ChatServlet extends HttpServlet {
 

@@ -19,6 +19,10 @@ import model.User;
 /**
  * Servlet implementation class MessageServlet
  */
+/**
+ *
+ * @author baishalya
+ */
 @WebServlet("/MessageServlet")
 public class MessageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

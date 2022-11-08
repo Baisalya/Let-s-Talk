@@ -39,9 +39,9 @@
 	}
 %>
     <form action="ShowUserDeatails" method="post">
-    <input type="hidden" name="type" value="change_profile">    
+    
     <div class="container">
-         <input type="hidden" name="type" value="change_profile">  
+     
     <div class="row gutters">
     <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
     <div class="card h-100">
@@ -51,6 +51,7 @@
                     <div class="user-avatar">
                         <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin">
                     </div>
+                      
                     <h5 class="user-name" name="username"id="username"><%= new UserDAO().getUserById((Integer) session.getAttribute("user_id")).getName() %></h5>
                     <h6 class="user-email"name="useremail"id="useremail"><%= new UserDAO().getUserById((Integer) session.getAttribute("user_id")).getEmail() %></h6>
                 </div>
@@ -70,8 +71,9 @@
                     <h6 class="mb-2 text-primary">Personal Details</h6>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    
+                    <input type="hidden" name="type" value="change_profile"> 
                     <div class="form-group">
+                         
                         <label for="fullName" >Full Name</label>
                         <input type="text" class="form-control"name="fullName" id="fullName"required value="<%=new UserDAO().getUserById((Integer) session.getAttribute("user_id")).getName()%>">
                                                    
@@ -148,7 +150,7 @@
                     <br><br>
                     <div class="text-right">
                         <button type="button" id="submit" name="submit" class="btn btn-secondary">Cancel</button>
-                        <button type="button" id="submit" name="submit" class="btn btn-primary">Update</button>
+                        <button type="submit" id="submit" name="submit" class="btn btn-primary">Update</button>
                     </div>
                 </div>
             </div>
