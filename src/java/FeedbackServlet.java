@@ -34,13 +34,14 @@ public class FeedbackServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         String name=request.getParameter("name");
         String email=request.getParameter("email");
-        String phoneno=request.getParameter("phone");
+        String phone=request.getParameter("phone");
         String message=request.getParameter("message");
+        out.print(name);
         boolean status=true;
         if(name.equals("")){
             out.println("name cant be empty");
          status=false;
-        }if(phoneno.equals("")){
+        }if(phone.equals("")){
           status=true;
         }
         if(email.equals("")){
@@ -59,9 +60,10 @@ public class FeedbackServlet extends HttpServlet {
             Feedback feedback=new Feedback();
             feedback.setName(name);
             feedback.setEmail(email);
-            feedback.setPhone(phoneno);
+            feedback.setPhone(phone);
             feedback.setFeedback(message);
             String sent=feedbackDAO.SentFeedback(feedback);
+            System.out.print("lala");
         }
     }
 

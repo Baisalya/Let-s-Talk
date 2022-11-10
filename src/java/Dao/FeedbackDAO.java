@@ -20,7 +20,7 @@ public class FeedbackDAO {
     public String SentFeedback(Feedback feedback) {
         try{
             Connection conn=dbconnection.getInstance().getConnection();
-            PreparedStatement st = conn.prepareStatement("insert into feedback(name,email,phone,feedback)values(?,?,?,?);");
+            PreparedStatement st = conn.prepareStatement("INSERT INTO feedback(name,email,phone,feedback) VALUES (?,?,?,?);");
             st.setString(1, feedback.getName());
             st.setString(2, feedback.getEmail());
             st.setString(3, feedback.getPhone());
@@ -28,7 +28,8 @@ public class FeedbackDAO {
             st.execute();
             return "Successfully Sent";
             
-          }catch(SQLException e){
+          }catch(Exception e){
+              e.printStackTrace();
         return "unsucessfull";
     }
     } 
