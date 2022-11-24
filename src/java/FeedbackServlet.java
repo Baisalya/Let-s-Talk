@@ -63,7 +63,7 @@ public class FeedbackServlet extends HttpServlet {
             feedback.setPhone(phone);
             feedback.setFeedback(message);
             String sent=feedbackDAO.SentFeedback(feedback);
-            System.out.print("lala");
+           // System.out.print("lala");
         }
     }
 

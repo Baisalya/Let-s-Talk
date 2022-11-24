@@ -44,7 +44,6 @@ if (session == null || session.getAttribute("user_id") == null) {
 
 .msg_send_btn {
 	background: #05728f none repeat scroll 0 0;
-        background-image:url('assets/bg.png');
 	border: medium none;
 	border-radius: 50%;
 	color: #fff;

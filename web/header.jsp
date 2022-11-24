@@ -20,30 +20,18 @@
     <link rel="stylesheet" href="assets/css/Signup-page-with-overlay.css">
 </head>
 <header>
-	    <nav class="navbar navbar-dark navbar-expand-md" id="app-navbar">
-        <div class="container-fluid"><a class="navbar-brand" href="#">
-                <i class="icon ion-ios-infinite" id="brand-logo"></i>
-            </a>
-            <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
-                <span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span>
-            </button>
+<nav class="navbar navbar-dark navbar-expand-md" id="app-navbar">
+        <div class="container-fluid"><a class="navbar-brand" href="#"><i class="icon ion-ios-infinite" id="brand-logo"></i></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link chat-box" href="MessageServlet">Chat</a></li>
-                    <li class="nav-item">
-                        
-                        <a class="nav-link" href="Profile.jsp">Profile</a>                         
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href="MessageServlet">Chat</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Profile.jsp">Profile</a></li>
                     <li class="nav-item"><a class="nav-link" href="logout">logout</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-  <div class="container">
-        <div class="row">
-            <div class="col-md-12 offset-md-0" style="width: 1145px;height: 1px;"></div>
-        </div>
-    </div>
+ 
 </header>
 </html>

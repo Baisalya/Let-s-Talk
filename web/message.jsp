@@ -29,7 +29,6 @@ if (session == null || session.getAttribute("user_id") == null) {
 	@media (max-width:800px){
 		.container {
 	    	margin-top: 240px !important;
-                   background-image:url('assets/bg.png');
 		}
 	}
 	
@@ -58,9 +57,10 @@ if (session == null || session.getAttribute("user_id") == null) {
         
 </style>
 </head>
+<%@include file="header.jsp" %>
 <body class="bg-dark">
 
-	<%@include file="header.jsp" %>
+	
 
 	<main role="main">
 

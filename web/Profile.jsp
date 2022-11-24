@@ -29,9 +29,9 @@
     <link rel="stylesheet" href="assets/css/Simple-Slider.css">
     <link rel="stylesheet" href="assets/css/Testimonials.css">
 </head>
-
+ <%@include file="header.jsp" %>
 <body>
-    <%@include file="header.jsp" %>
+   
    <%@ page import="Dao.UserDAO"%>
 <%
 	if (session == null || session.getAttribute("user_id") == null) {
