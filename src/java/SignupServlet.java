@@ -64,20 +64,21 @@ private static final Pattern password_pattern=
 		}
 		
 		if(email.equals("")) {
-			request.setAttribute("emsg", "Email is required ");
+			//request.setAttribute("emsg", "Email is required ");
                         out.println("email is required");
 			status = false;
 		}
 		if(password.equals("")) {
-			request.setAttribute("pmsg", "Password is required ");
+			//request.setAttribute("pmsg", "Password is required ");
                         out.println("password is required");
 			status = false;
 		}
 		
-		if(!status) {
-			request.setAttribute("page", "register");
-			request.getRequestDispatcher("index.html").forward(request, response);
-		} else {
+		//if(!status) {
+			//request.setAttribute("page", "register");
+			//request.getRequestDispatcher("index.html").forward(request, response);
+		//} 
+                    else {
 			UserDAO usersDAO = new UserDAO();
 			User user = new User();
 			user.setPassword(password);

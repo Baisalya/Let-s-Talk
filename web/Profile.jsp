@@ -39,7 +39,7 @@
 	}
 %>
     <form action="ShowUserDeatails" method="post">
-    
+     <input type="hidden" name="type" value="change_profile">
     <div class="container">
      
     <div class="row gutters">

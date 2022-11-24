@@ -36,7 +36,7 @@ public class FeedbackServlet extends HttpServlet {
         String email=request.getParameter("email");
         String phone=request.getParameter("phone");
         String message=request.getParameter("message");
-        out.print(name);
+        //out.print(name);
         boolean status=true;
         if(name.equals("")){
             out.println("name cant be empty");
@@ -63,7 +63,9 @@ public class FeedbackServlet extends HttpServlet {
             feedback.setPhone(phone);
             feedback.setFeedback(message);
             String sent=feedbackDAO.SentFeedback(feedback);
-           // System.out.print("lala");
+           // request.setAttribute("msg", "success");
+            System.out.print("Success fully sent feedback");
+            
         }
     }
 

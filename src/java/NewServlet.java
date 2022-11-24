@@ -79,7 +79,7 @@ public NewServlet() {
 					e.printStackTrace();
 					//request.setAttribute("page", "login");
 					//request.setAttribute("msg", "Login Failed.");
-					request.getRequestDispatcher("index.html").forward(request, response);
+					//request.getRequestDispatcher("index.html").forward(request, response);
 				}
 			} else {
 				//request.setAttribute("page", "login");
