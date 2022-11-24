@@ -104,6 +104,7 @@ PreparedStatement pst;
             throws ServletException, IOException {
         doGet(request, response);
          response.setContentType("text/html");
+            PrintWriter out = response.getWriter();
              HttpSession session = request.getSession(false);
             //String fullname=request.getParameter("fullName").trim();
            // String UserEmail=request.getParameter("eMail").trim();
@@ -117,7 +118,8 @@ PreparedStatement pst;
                         String UserEmail=request.getParameter("eMail").trim();
 			
 			if(fullname.equals("") || UserEmail.equals("")) {
-				request.setAttribute("pmsg", "Type all required fields.");
+                                out.println("Type all required fields.");
+//				request.setAttribute("pmsg", "Type all required fields.");
 				doGet(request, response);
 			} else {
 				UserDAO userDAO = new UserDAO();
