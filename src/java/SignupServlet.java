@@ -26,14 +26,14 @@ import model.User;
  */
 public class SignupServlet extends HttpServlet {
      String regex="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{6}$";
-private static final Pattern password_pattern=
-        Pattern.compile("^"+                                  
-             "(?=.*[0-9]) "+                     
-             "(?=.*[a-z])"+                       
-             "(?=.*[A-Z])"+                      
-             "(?=.*[!@#&()–[{}]:;',?/*~$^+=<>])"+ 
-             "{6}"+                           
-             "$");
+//private static final Pattern password_pattern=
+//        Pattern.compile("^"+                                  
+//             "(?=.*[0-9]) "+                     
+//             "(?=.*[a-z])"+                       
+//             "(?=.*[A-Z])"+                      
+//             "(?=.*[!@#&()–[{}]:;',?/*~$^+=<>])"+ 
+//             "{6}"+                           
+//             "$");
       //Matcher match=password_pattern.matcher(request.getParameter("pass"));
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -74,11 +74,12 @@ private static final Pattern password_pattern=
 			status = false;
 		}
 		
-		//if(!status) {
-			//request.setAttribute("page", "register");
-			//request.getRequestDispatcher("index.html").forward(request, response);
-		//} 
-                    else {
+//		if(!status) {
+//			request.setAttribute("page", "register");
+//			request.getRequestDispatcher("index.html").forward(request, response);
+//		} 
+                
+                else {
 			UserDAO usersDAO = new UserDAO();
 			User user = new User();
 			user.setPassword(password);
